@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Status;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class StatusesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(HometownsTableSeeder::class);
-        $this->call(StatusesTableSeeder::class);
+        Status::create(['label' => 'Assistant']);
+        Status::create(['label' => 'Master']);
     }
 }
