@@ -14,12 +14,15 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
+
             $table->id();
             $table->string('fullname');
+            $table->string('photo')->nullable();
             $table->string('qrcode')->nullable();
             $table->foreignId('hometowns_id')->constrained()->onDelete('cascade');
             $table->foreignId('statuses_id')->nullable()->constrained();
             $table->timestamps();
+
         });
     }
 

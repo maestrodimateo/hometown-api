@@ -48,10 +48,10 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
 ## Sprint 1 (une semaine)
     - Simple User
         1. Enregistrement d'un agent dans une mairie
-            - Créer les migrations
-            - Créer les modèles
+            - Créer les migrations ✔
+            - Créer les modèles ✔
+            - Créer des seeds (hometown, status, user, rôle) ✔
             - Créer les tests
-            - Créer des seeds (hometown, status, user, rôle)
         2. Afficher les mairies
         3. Afficher les agents d'une mairie
         4. Création d'une mairie

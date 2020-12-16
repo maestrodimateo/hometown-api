@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Staff extends Model
 {
-    protected $fillable = ['fullname', 'qrcode', 'statuses_id', 'hometowns_id'];
+    protected $fillable = [
+        'fullname', 'qrcode',
+        'statuses_id','hometowns_id', 'photo'
+    ];
 
 
     /**
