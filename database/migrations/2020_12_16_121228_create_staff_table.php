@@ -18,7 +18,7 @@ class CreateStaffTable extends Migration
             $table->id();
             $table->string('fullname');
             $table->string('photo')->nullable();
-            $table->string('qrcode')->nullable();
+            $table->string('qrcode')->nullable()->unique();
             $table->foreignId('hometowns_id')->constrained()->onDelete('cascade');
             $table->foreignId('statuses_id')->nullable()->constrained();
             $table->timestamps();
