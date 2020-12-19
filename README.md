@@ -14,6 +14,10 @@
 11. Paramétrer le __qrcode__ avec le bon lien
 12. Supprimer un agent d'une mairie
 13. Modifier un agent d'une mairie
+14. Générer le __qrcode__ d'un agent
+15. Générer le __qrcode__ de tous les agents
+16. Rechercher tous les agents
+17. Rechercher toutes les mairies
 
 ## Compréhension du projet
 
@@ -44,10 +48,10 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
 ## Sprint 1 (une semaine)
     - Simple User
         1. Enregistrement d'un agent dans une mairie
-            - Créer les migrations
-            - Créer les modèles
+            - Créer les migrations ✔
+            - Créer les modèles ✔
+            - Créer des seeds (hometown, status, user, rôle) ✔
             - Créer les tests
-            - Créer des seeds (hometown, status, user, rôle)
         2. Afficher les mairies
         3. Afficher les agents d'une mairie
         4. Création d'une mairie
@@ -55,3 +59,8 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
         10. Connexion/déconnexion
         12. Supprimer un agent d'une mairie
         13. Modifier un agent d'une mairie
+
+### Remarques
+
+- Si la mairie n'a pas encore d'url de base, alors on enregistre l'agent sans qrcode;
+- On peut générer ultérieurement le qrcode de tous les agents enregistrés
