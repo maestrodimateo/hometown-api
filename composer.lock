@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01a23698f252e2707ef31337f81eb36a",
+    "content-hash": "de77dd4247de969cd189f77430cc4e3c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2190,6 +2190,60 @@
                 "watermark"
             ],
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "irazasyed/larasupport",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/irazasyed/larasupport.git",
+                "reference": "5860adc79ee5dd7e62e2f83ac12c1815cc57b5e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/irazasyed/larasupport/zipball/5860adc79ee5dd7e62e2f83ac12c1815cc57b5e1",
+                "reference": "5860adc79ee5dd7e62e2f83ac12c1815cc57b5e1",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Irazasyed\\Larasupport\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Irfaq Syed",
+                    "email": "syed+gh@lukonet.com",
+                    "homepage": "https://github.com/irazasyed"
+                }
+            ],
+            "description": "Adds Laravel Package Support in Lumen.",
+            "keywords": [
+                "larasupport",
+                "laravel",
+                "laravel lumen support",
+                "laravel package support",
+                "laravel packages",
+                "lumen packages",
+                "lumen support"
+            ],
+            "time": "2020-10-19T06:26:37+00:00"
         },
         {
             "name": "laravel/lumen-framework",

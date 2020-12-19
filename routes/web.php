@@ -4,6 +4,7 @@
 
 $router->group(['prefix' => 'api'], function() use ($router) {
 
-    $router->post('create-staff', ['as' => 'create.staff', 'uses' => 'StaffController@create']);
-    $router->get('all-staff', [ 'as' => 'all.staff', 'uses' => 'StaffController@allStaff']);
+    $router->post('staff/create', ['as' => 'create.staff', 'uses' => 'StaffController@create']);
+    $router->get('staff/all', [ 'as' => 'all.staff', 'uses' => 'StaffController@all']);
+    $router->delete('staff/delete/{id}', ['as' => 'delete.staff', 'uses' => 'StaffController@delete']);
 });

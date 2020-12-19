@@ -97,6 +97,8 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(GrahamCampbell\Flysystem\FlysystemServiceProvider::class);
 $app->register(Intervention\Image\ImageServiceProvider::class);
 $app->register(SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class);
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

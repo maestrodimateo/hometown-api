@@ -60,11 +60,31 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function allStaff()
+    public function all()
     {
         $all_staff = Staff::all();
-
         return response()->json($all_staff, 200);
+    }
+
+    /**
+     * Delete an agent
+     *
+     * @param int $id id of the agent
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($id)
+    {
+        $member = Staff::find($id);
+        
+        if (is_null($member)) {
+            return response()->json(['error' => 'staff not found'], 500);
+        }
+        // delete the file of the user
+        unlink(public_path() . "/pictures/$member->photo");
+        $response = $member->delete();
+
+        return response()->json(['response' => $response], 200);
     }
 
 }
