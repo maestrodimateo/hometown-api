@@ -6,6 +6,7 @@ use App\Models\Staff;
 use App\Models\Hometown;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -31,16 +32,12 @@ class StaffController extends Controller
         );
 
         // upload the file
-        $photo = $request->file('photo')
-            ->move('pictures', $request->file('photo')->hashName());
-        Image::make($photo->getRealPath())->resize(500, 600)->save();
+        $picture = $this->store_file($request->file('photo'));
 
         $hometown = Hometown::find($request->hometown_id);
-        
+
         // Create the qrcode
-        $base_url = trim('/', $hometown->base_url);
-        $qrcode = (!is_null($base_url)) ? 
-        QrCode::size(250)->generate($base_url .'/'. Str::slug($request->fullname)) : null;
+        $qrcode = $this->create_qrcode($hometown->base_url, $request->fullname);
 
 
 
@@ -48,10 +45,12 @@ class StaffController extends Controller
         $hometown->staff()->create(
             [
                 'fullname' => $request->fullname,
-                'photo' => $photo->getFilename(),
+                'photo' => $picture->basename,
                 'qrcode' => $qrcode,
+                'status' => $request->status
             ]
         );
+
         return response()->json(['message' => 'Agent ajouté avec succès'], 201);
     }
 
@@ -81,10 +80,94 @@ class StaffController extends Controller
             return response()->json(['error' => 'staff not found'], 500);
         }
         // delete the file of the user
-        unlink(public_path() . "/pictures/$member->photo");
+        delete_file("pictures/$member->photo");
         $response = $member->delete();
 
         return response()->json(['response' => $response], 200);
     }
 
+    /**
+     * Update a staff
+     *
+     * @param integer $id staff's id
+     * @return @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, int $id)
+    {
+        // validate the data
+        $this->validate(
+            $request,
+            [
+                'fullname' => 'required',
+                'photo' => 'nullable|image',
+            ]
+        );
+
+        // find the staff to update
+        $member = Staff::find($id);
+        if (is_null($member)) {
+            return response()->json(['error' => 'staff not found'], 500);
+        }
+
+        // replace the file if exist
+        $photo = $request->file('photo');
+        if (!is_null($photo)) {
+            $replacer = $this->replace_file("pictures/{$member->photo}", $photo);
+        }
+
+        // update the qrcode
+        $qrcode = $this->create_qrcode($member->hometown->base_url, $request->fullname);
+
+        $member->update([
+            'fullname' => $request->fullname,
+            'photo'  => $replacer->basename ?? $member->photo,
+            'qrcode' => $qrcode,
+            'status' => $request->status
+        ]);
+
+        return response()->json(['message' => "{$member->fullname} aa bien été mis à jour"], 200);
+    }
+
+    /**
+     * store a file in the file System
+     *
+     * @param UploadedFile $photo
+     * 
+     * @return Intervention\Image\Image
+     */
+    private function store_file(UploadedFile $photo)
+    {
+        $added_picture = $photo->move('pictures', $photo->hashName());
+        return Image::make($added_picture->getRealPath())->resize(500, 600)->save();
+    }
+
+    /**
+     * Create a Qrcode
+     *
+     * @param string $base_url
+     * 
+     * @param string $slug
+     * 
+     * @return void|Illuminate\Support\HtmlString|string|null
+     */
+    private function create_qrcode(string $base_url, string $slug)
+    {
+        // Create the qrcode
+        $base_url = trim('/', $base_url);
+        return (!is_null($base_url)) ?
+        QrCode::size(250)->generate($base_url . '/' . Str::slug($slug)) : null;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $path_to_old
+     * @param UploadedFile $new
+     * @return void
+     */
+    private function replace_file(string $path_to_old, UploadedFile $new)
+    {
+        delete_file($path_to_old);
+        return $this->store_file($new);
+    }
 }
