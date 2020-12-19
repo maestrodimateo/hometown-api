@@ -8,8 +8,10 @@ class Staff extends Model
 {
     protected $fillable = [
         'fullname', 'qrcode',
-        'statuses_id','hometowns_id', 'photo'
+        'status_id','hometown_id', 'photo'
     ];
+
+    protected $with = ['hometown'];
 
 
     /**
