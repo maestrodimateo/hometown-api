@@ -17,17 +17,15 @@ class StaffControllerTest extends TestCase
      */
     public function staff_can_be_created()
     {
-        Storage::fake('local');
+        Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.jpg');
-
         $formdata = [
             'fullname' => 'Jean boniface',
             'photo' => $file,
-            'qrcode' => 'path/to/qrcode',
             'hometown_id' => 1,
         ];
 
-        $this->json('post', route('create.staff'), $formdata)->seeStatusCode(201);
+        $this->json('post', route('create.staff'), $formdata)->assertResponseStatus(201);
         $this->assertFileExists($file->hashName());
 
     }

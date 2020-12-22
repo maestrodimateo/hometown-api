@@ -52,13 +52,13 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
             - Créer les modèles ✔
             - Créer des seeds (hometown, status, user, rôle) ✔
             - Créer les tests
-        2. Afficher les mairies
-        3. Afficher les agents d'une mairie
-        4. Création d'une mairie
+        2. Afficher les mairies ✔
+        3. Afficher les agents d'une mairie ✔
+        4. Création d'une mairie ✔
         9. Visualisation des informations de l'agent avec qrcode
         10. Connexion/déconnexion
-        12. Supprimer un agent d'une mairie
-        13. Modifier un agent d'une mairie
+        12. Supprimer un agent d'une mairie ✔
+        13. Modifier un agent d'une mairie ✔
 
 ### Remarques
 

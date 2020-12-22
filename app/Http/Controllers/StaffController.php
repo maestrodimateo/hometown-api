@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Staff;
 use App\Models\Hometown;
-use Illuminate\Support\Str;
+use App\Services\Staffservice;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StaffController extends Controller
 {
@@ -35,9 +34,8 @@ class StaffController extends Controller
         $picture = $this->store_file($request->file('photo'));
 
         $hometown = Hometown::find($request->hometown_id);
-
         // Create the qrcode
-        $qrcode = $this->create_qrcode($hometown->base_url, $request->fullname);
+        $qrcode = Staffservice::create_qrcode($hometown->base_url, $request->fullname);
 
 
 
@@ -116,7 +114,7 @@ class StaffController extends Controller
         }
 
         // update the qrcode
-        $qrcode = $this->create_qrcode($member->hometown->base_url, $request->fullname);
+        $qrcode = Staffservice::create_qrcode($member->hometown->base_url, $request->fullname);
 
         $member->update([
             'fullname' => $request->fullname,
@@ -141,25 +139,10 @@ class StaffController extends Controller
         return Image::make($added_picture->getRealPath())->resize(500, 600)->save();
     }
 
-    /**
-     * Create a Qrcode
-     *
-     * @param string $base_url
-     * 
-     * @param string $slug
-     * 
-     * @return void|Illuminate\Support\HtmlString|string|null
-     */
-    private function create_qrcode(string $base_url, string $slug)
-    {
-        // Create the qrcode
-        $base_url = trim('/', $base_url);
-        return (!is_null($base_url)) ?
-        QrCode::size(250)->generate($base_url . '/' . Str::slug($slug)) : null;
-    }
+
 
     /**
-     * Undocumented function
+     * Replace an old file by a new one
      *
      * @param string $path_to_old
      * @param UploadedFile $new
@@ -169,5 +152,21 @@ class StaffController extends Controller
     {
         delete_file($path_to_old);
         return $this->store_file($new);
+    }
+
+    /**
+     * Find a single staff
+     *
+     * @param integer $id
+     * 
+     * @return void
+     */
+    public function single_staff (int $id)
+    {
+        $member = Staff::find($id);
+
+        return is_null($member) ?
+        response()->json(['error' => 'Staff not found'], 404):
+        response()->json($member, 200);
     }
 }
