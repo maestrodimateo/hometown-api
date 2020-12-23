@@ -2,7 +2,7 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
 
     // Staff management
     $router->post('staff/create', ['as' => 'create.staff', 'uses' => 'StaffController@create']);

@@ -90,11 +90,11 @@ class HometownController extends Controller
 
         $hometown = Hometown::find($id);
 
-        // check if the saved base_url is the same with the form base_url
-        $egal = $request->base_url === $hometown->base_url;
+        // check if the saved base_url is the same as the form base_url
+        $same = $request->base_url === $hometown->base_url;
         $hometown->update($request->all());
         
-        if (!$egal) {
+        if (!$same) {
             // update the staff qrcode
             $hometown->staff->each(function ($item) use ($hometown){
                $qrcode = Staffservice::create_qrcode($hometown->base_url, $item->fullname);
