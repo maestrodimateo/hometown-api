@@ -7,13 +7,13 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
 
     // Staff management
     $router->get('staff/all', ['as' => 'all.staff', 'uses' => 'StaffController@all']);
-    $router->get('staff/single/{id}', ['as' => 'single.staff', 'uses' => 'StaffController@single_staff']);
     $router->post('staff/search', ['as' => 'search.staff', 'uses' => 'StaffController@search']);
+    $router->get('staff/single/{id}', ['as' => 'single.staff', 'uses' => 'StaffController@single_staff']);
 
     // Hometown management
-    $router->get('hometown/single/{id}', ['as' => 'single.hometown', 'uses' => 'HometownController@single_hometown']);
     $router->get('hometown/all', ['as' => 'all.hometown', 'uses' => 'HometownController@all']);
     $router->post('hometown/search', ['as' => 'search.hometown', 'uses' => 'HometownController@search']);
+    $router->get('hometown/single/{id}', ['as' => 'single.hometown', 'uses' => 'HometownController@single_hometown']);
 
     $router->get('logout', ['as' => 'logout.user', 'uses' => 'UserController@logout']);
 

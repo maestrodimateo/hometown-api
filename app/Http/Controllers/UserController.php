@@ -19,9 +19,6 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        if (Gate::allows('update-post', $post)) {
-            //
-        }
         $this->validate($request, [
             'email' => 'email|required|unique:users',
             'password' => 'string|required|confirmed',
@@ -130,11 +127,10 @@ class UserController extends Controller
      */
     public function logout()
     {
-        $user = auth()->user();
-        $user->api_token = null;
-        $user->save();
+        $user = User::find(auth()->user()->id);
+        $user->update(['api_token' => null]);
 
-        return response()->json(['message' => "you're logged out", 'state' => true], 200);
+        return response()->json(['message' => "Vous vous êtes déconnecté", 'state' => true], 200);
     }
 
     /**
