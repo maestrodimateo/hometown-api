@@ -66,6 +66,7 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
     - Admin
         7. Création des comptes utilisateurs ✔
         10. Connexion/déconnexion ✔
+    - Authorization management
 
 ### Remarques
 

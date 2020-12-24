@@ -73,11 +73,15 @@ $app->configure('app');
 */
 
 // $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
+//     App\Http\Middleware\NotDesignerMiddleware::class,
+//     App\Http\Middleware\AdminMiddleware::class,
 // ]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'admin-simple-user '=> App\Http\Middleware\NotDesignerMiddleware::class,
+    'admin' => App\Http\Middleware\AdminMiddleware::class,
+
 ]);
 /*
 |--------------------------------------------------------------------------

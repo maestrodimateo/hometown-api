@@ -11,6 +11,10 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    public const SIMPLE_USER = 1;
+    public const ADMIN = 2;
+    public const DESIGNER = 3;
+
     use Authenticatable, Authorizable, HasFactory;
 
     /**

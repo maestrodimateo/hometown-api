@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -18,6 +19,9 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        if (Gate::allows('update-post', $post)) {
+            //
+        }
         $this->validate($request, [
             'email' => 'email|required|unique:users',
             'password' => 'string|required|confirmed',
@@ -57,7 +61,7 @@ class UserController extends Controller
     public function update(Request $request, int $id)
     {
         $this->validate($request, [
-            'email' => [ 'email', 'required', Rule::unique('users')->ignore($id)],
+            'email' => ['email', 'required', Rule::unique('users')->ignore($id)],
             'fullname' => 'required',
             'role_id' => 'required|integer'
         ]);
