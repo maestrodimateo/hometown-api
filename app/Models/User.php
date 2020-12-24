@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
-    protected $fillable = [ 'fullname', 'email', 'password', 'role_id'];
+    protected $fillable = [ 'fullname', 'email', 'password', 'api_token', 'role_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -35,5 +35,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Set the password hashed
+     *
+     * @param string $password: password Not hashed
+     * 
+     * @return void
+     */
+    public function setPasswordAttribute(string $password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }

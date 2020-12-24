@@ -104,4 +104,21 @@ class HometownController extends Controller
 
         return response()->json(['message' => 'Mairie mise à jour avec succès'], 200);
     }
+
+    /**
+     * Search users
+     *
+     * @param Request $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'label' => 'nullable|string'
+        ]);
+
+        $response = Hometown::where('label', 'LIKE', "%{$request->label}%")->get();
+
+        return response()->json(['users' => $response], 200);
+    }
 }

@@ -169,4 +169,21 @@ class StaffController extends Controller
         response()->json(['error' => 'Staff not found'], 404):
         response()->json($member, 200);
     }
+
+    /**
+     * Search staff
+     *
+     * @param Request $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'fullname' => 'nullable|string'
+        ]);
+
+        $response = Staff::where('fullname', 'LIKE', "%{$request->fullname}%")->get();
+
+        return response()->json(['staff' => $response], 200);
+    }
 }

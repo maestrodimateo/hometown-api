@@ -56,9 +56,16 @@ En réalité, ce projet est destiné à effectuer des enregistrements de plusieu
         3. Afficher les agents d'une mairie ✔
         4. Création d'une mairie ✔
         9. Visualisation des informations de l'agent avec qrcode
-        10. Connexion/déconnexion
+        10. Connexion/déconnexion ✔
         12. Supprimer un agent d'une mairie ✔
         13. Modifier un agent d'une mairie ✔
+        16. Rechercher tous les agents ✔
+        17. Rechercher toutes les mairies ✔
+
+## Sprint 2
+    - Admin
+        7. Création des comptes utilisateurs ✔
+        10. Connexion/déconnexion ✔
 
 ### Remarques
 
