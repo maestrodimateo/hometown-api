@@ -23,9 +23,9 @@ class HometownController extends Controller
             'base_url' => 'url|nullable|unique:hometowns'
         ]);
 
-        $Hometown = Hometown::create($request->all());
+        Hometown::create($request->all());
 
-        return response()->json($Hometown, 201);
+        return response()->json(['message' => 'Mairie ajoutée avec succès'], 201);
     }
 
     /**
@@ -41,17 +41,19 @@ class HometownController extends Controller
     }
 
     /**
-     * Get one hometown
+     * Get all the staff of an hometown
      *
      * @param integer $id if of the hometoxn
      * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function single_hometown(int $id)
+    public function hometown_staff(int $id)
     {
         $hometown = Hometown::findOrFail($id);
 
-        return response()->json($hometown, 200);
+        $staff = $hometown->staff;
+
+        return response()->json($staff, 200);
     }
 
     /**

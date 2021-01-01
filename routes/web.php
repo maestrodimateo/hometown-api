@@ -13,7 +13,7 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
     // Hometown management
     $router->get('hometown/all', ['as' => 'all.hometown', 'uses' => 'HometownController@all']);
     $router->post('hometown/search', ['as' => 'search.hometown', 'uses' => 'HometownController@search']);
-    $router->get('hometown/single/{id}', ['as' => 'single.hometown', 'uses' => 'HometownController@single_hometown']);
+    $router->get('hometown/{id}/staff', ['as' => 'hometown.staff', 'uses' => 'HometownController@hometown_staff']);
 
     $router->get('logout', ['as' => 'logout.user', 'uses' => 'UserController@logout']);
 
@@ -42,7 +42,6 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
         $router->delete('user/delete/{id}', ['as' => 'delete.user', 'uses' => 'UserController@delete']);
         $router->post('user/search', ['as' => 'search.user', 'uses' => 'UserController@search']);
     });
-
 });
 
 $router->post('api/login', ['as' => 'login.user', 'uses' => 'UserController@login']);

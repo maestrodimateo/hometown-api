@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -113,9 +112,11 @@ class UserController extends Controller
 
         $user->api_token = Str::random(150);
         $user->save();
+
         return response()->json([
             'message' => "Bienvenue M(me) {$user->fullname}",
-            'auth' => auth()->user()
+            'token'   => $user->api_token,
+            'auth'    => collect($user)->except(['api_token'])
         ], 200);
     }
 
