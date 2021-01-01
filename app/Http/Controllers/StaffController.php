@@ -43,7 +43,7 @@ class StaffController extends Controller
         $hometown->staff()->create(
             [
                 'fullname' => $request->fullname,
-                'photo' => $picture->basename,
+                'photo' => assets('pictures/' . $picture->basename),
                 'qrcode' => $qrcode,
                 'status' => $request->status
             ]
