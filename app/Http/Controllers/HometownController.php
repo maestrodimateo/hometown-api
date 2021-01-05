@@ -35,7 +35,7 @@ class HometownController extends Controller
      */
     public function all()
     {
-        $hometowns = Hometown::all();
+        $hometowns = Hometown::withCount('staff')->get();
 
         return response()->json($hometowns, 200);
     }
@@ -108,7 +108,7 @@ class HometownController extends Controller
     }
 
     /**
-     * Search users
+     * Search hometowns
      *
      * @param Request $request
      * @return Illuminate\Http\JsonResponse
@@ -119,8 +119,8 @@ class HometownController extends Controller
             'label' => 'nullable|string'
         ]);
 
-        $response = Hometown::where('label', 'LIKE', "%{$request->label}%")->get();
+        $hometowns = Hometown::withCount('staff')->where('label', 'LIKE', "%{$request->label}%")->get();
 
-        return response()->json(['users' => $response], 200);
+        return response()->json(['users' => $hometowns], 200);
     }
 }
